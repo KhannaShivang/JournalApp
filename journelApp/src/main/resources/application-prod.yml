@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: Journaling App
+  data:
+    mongodb:
+      uri: mongodb+srv://shivangkhanna140903:Shivang2006@cluster0.sekde.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+      database: journaldb
+      auto-indexed-creation: true
+server:
+  port: 9090
+  servlet:
+    context-path: /journal
