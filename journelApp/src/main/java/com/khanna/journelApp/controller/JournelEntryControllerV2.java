@@ -24,8 +24,12 @@ import com.khanna.journelApp.entity.User;
 import com.khanna.journelApp.service.JournalEntryService;
 import com.khanna.journelApp.service.UserService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/journal")
+@Tag(name="JournalEntry APIs")
 public class JournelEntryControllerV2 {
 
     @Autowired
@@ -34,6 +38,7 @@ public class JournelEntryControllerV2 {
     private UserService userService;
 
     @GetMapping()
+    @Operation(summary = "Get All JournalEntries of User")
     public ResponseEntity<?> getAllForUser(){ 
         Authentication auth=SecurityContextHolder.getContext().getAuthentication();
         String userName = auth.getName();
@@ -55,13 +60,14 @@ public class JournelEntryControllerV2 {
     }
 
     @GetMapping("id/{id}")
-    public ResponseEntity<JournelEntry> getEntryById(@PathVariable ObjectId id){
+    public ResponseEntity<JournelEntry> getEntryById(@PathVariable String id){
+        ObjectId myId = new ObjectId(id);
         Authentication auth=SecurityContextHolder.getContext().getAuthentication();
         String userName = auth.getName();
         User user = userService.findByUserName(userName);
-        List<JournelEntry>list = user.getJournalEntries().stream().filter(i -> i.getId().equals(id)).collect(Collectors.toList());
+        List<JournelEntry>list = user.getJournalEntries().stream().filter(i -> i.getId().equals(myId)).collect(Collectors.toList());
         if(!list.isEmpty()){
-            Optional<JournelEntry>journalEntry=journalEntryService.findById(id);
+            Optional<JournelEntry>journalEntry=journalEntryService.findById(myId);
             if(journalEntry.isPresent()){
                 return new ResponseEntity<>(journalEntry.get(),HttpStatus.OK);
             }

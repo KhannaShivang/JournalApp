@@ -29,6 +29,12 @@ public class UserService {
         user.setDate(LocalDateTime.now());
         userRepo.save(user);
     }
+    public void saveNewAdmin(User user){
+        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        user.setRoles(Arrays.asList("USER","ADMIN"));
+        user.setDate(LocalDateTime.now());
+        userRepo.save(user);
+    }
 
     public List<User> getAll(){
         return userRepo.findAll();

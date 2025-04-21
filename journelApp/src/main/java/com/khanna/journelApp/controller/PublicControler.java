@@ -17,8 +17,11 @@ import com.khanna.journelApp.service.UserDetailsServiceImpl;
 import com.khanna.journelApp.service.UserService;
 import com.khanna.journelApp.utils.JWTUtil;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/public")
+@Tag(name="Public APIs")
 public class PublicControler { 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -35,8 +38,9 @@ public class PublicControler {
     }
     
     @PostMapping("/signup")
-    public void signup(@RequestBody User user){
+    public ResponseEntity<?> signup(@RequestBody User user){
         userService.saveNewUser(user);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PostMapping("/login")

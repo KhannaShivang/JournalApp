@@ -15,11 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.khanna.journelApp.service.UserService;
 import com.khanna.journelApp.service.WeatherService;
+
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import com.khanna.journelApp.api.response.WeatherResponse;
 import com.khanna.journelApp.entity.User;
 
 @RestController
 @RequestMapping("/User")
+@Tag(name="User APIs")
 public class UserControler {
     
     @Autowired

@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.khanna.journelApp.entity.JournelEntry;
 
+import io.swagger.v3.oas.annotations.Hidden;
+
+@Hidden
 @RestController
 @RequestMapping("/_journal")
 public class JournalEntryController {
