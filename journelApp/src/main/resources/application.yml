@@ -1,7 +1,0 @@
-spring:
-  profiles:
-    active: dev
-
-api:
-  key:
-    weather: "7fe15722874563437b180dfbd942234a"
