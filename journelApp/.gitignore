@@ -15,7 +15,7 @@ target/
 .springBeans
 .sts4-cache
 *.yml
-.properties
+*.properties
 
 ### IntelliJ IDEA ###
 .idea
